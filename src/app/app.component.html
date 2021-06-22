@@ -1,0 +1,17 @@
+<!-- welcome to {{title}}
+Hello {{user}}
+{{product.productName}}
+<ul>
+  <li *ngFor="let product of products">{{product.productName}}</li> foreach gibi döner
+</ul> -->
+<div class="container">
+  <app-navi></app-navi>
+  <div class="row">
+    <div class="col-3">
+      <app-category></app-category>
+    </div>
+    <div class="col-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

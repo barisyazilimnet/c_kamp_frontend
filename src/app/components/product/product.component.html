@@ -1,0 +1,38 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<div class="mb-3">
+    <label for="searchProduct" class="form-label">Ürün ara</label>
+    <input type="text" [(ngModel)]="searchProduct" class="form-control" id="searchProduct"
+        placeholder="Arama ifadesi giriniz">
+</div>
+<div *ngIf="searchProduct" class="alert alert-info">
+    {{searchProduct}} aradınız
+</div>
+<table *ngIf="dataLoaded" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ürün adı</th>
+            <th>Kategori</th>
+            <th>Fiyat</th>
+            <th>Kdv'li Fiyat</th>
+            <th>Stok Adedi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products | filterPipe:searchProduct">
+            <td>{{product.productId}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.categoryId}}</td>
+            <td>{{product.unitPrice | currency}}</td>
+            <td>{{product.unitPrice | vatAdded:18 | currency}}</td>
+            <!--birden fazla pipe için boşluk bırakılıp | eklenebilir parametre eklemek için | pipename:param1:param2 istenilen kadar parametre eklenebilir-->
+            <td>{{product.unitsInStock}}</td>
+            <td>
+                <button (click)="addToCart(product)" type="button" class="btn btn-outline-info">Sepete Ekle</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
